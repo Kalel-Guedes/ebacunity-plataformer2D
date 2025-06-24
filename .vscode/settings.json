@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Exercicio EBAC - Modulo 13 Plataformer - Kalel Guedes.sln"
+    "dotnet.defaultSolution": "ebacunity-plataformer2D.sln"
 }
