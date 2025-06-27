@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 796353937}
   - component: {fileID: 796353936}
   - component: {fileID: 796353940}
+  - component: {fileID: 796353941}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -584,6 +585,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!95 &796353941
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796353935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d14ff9caef099734c86eb9c82c54fb36, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &967526523
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +925,7 @@ GameObject:
   - component: {fileID: 1473755670}
   - component: {fileID: 1473755674}
   - component: {fileID: 1473755675}
+  - component: {fileID: 1473755676}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -1067,8 +1091,11 @@ MonoBehaviour:
   myRigidbody: {fileID: 1473755670}
   velocity: {x: 0, y: 0}
   speed: 5
-  speedRun: 15
+  speedRun: 10
   _currentSpeed: 0
+  animationTrigger: Walk
+  animationJump: Jump
+  animator: {fileID: 1473755676}
   forcejump: 7
 --- !u!114 &1473755675
 MonoBehaviour:
@@ -1085,6 +1112,28 @@ MonoBehaviour:
   startLife: 10
   destroyOnKill: 1
   delayKill: 0.4
+--- !u!95 &1473755676
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473755669}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: beae60776030b194cb14bd69420520bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1553939474
 GameObject:
   m_ObjectHideFlags: 0
