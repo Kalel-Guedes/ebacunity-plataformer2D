@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,19 +11,27 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float speedRun;
     public float _currentSpeed;
+    public float forcejump;
 
     public string animationTrigger = "Walk";
     public string animationJump = "Jump";
     public Animator animator;
+
+    public Transform shootPoint;
+    public Transform sideReference;
+    public Bullet prefabBullet;
+    public float timeShoot = .2f;
+    private Coroutine _currentCoroutine;
     
 
 
-    public float forcejump;
+
+    
 
     void Update()
     {
         Jump();
-        Movement();       
+        Movement();
 
     }
 
@@ -34,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           animator.SetBool(animationJump, false); 
+            animator.SetBool(animationJump, false);
         }
     }
     private void Movement()
@@ -53,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           animator.SetBool(animationTrigger, false); 
+            animator.SetBool(animationTrigger, false);
         }
 
 
@@ -68,5 +78,37 @@ public class PlayerMovement : MonoBehaviour
             _currentSpeed = speed;
             animator.speed = 1f;
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _currentCoroutine = StartCoroutine(StartShoot());
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if(_currentCoroutine != null){ StopCoroutine(_currentCoroutine); }
+        }
     }
+
+    IEnumerator StartShoot()
+    {
+        while (true)
+        {
+            Spawnitem();
+            yield return new WaitForSeconds(timeShoot);
+        }
+    }
+
+    private void Spawnitem()
+    {
+
+        var obj = Instantiate(prefabBullet);
+        obj.transform.position = shootPoint.transform.position;
+        obj.side = sideReference.transform.localScale.x;
+
+        //obj.transform.SetParent(null);
+        //obj.GetComponent<Rigidbody>().AddForce(Force);
+
+    }
+    
+     
 }
