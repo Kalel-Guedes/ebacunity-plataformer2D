@@ -7,7 +7,9 @@ using Core.Singleton;
 public class ItemManager : Singleton<ItemManager>
 {
     //public static ItemManager Instance;
-    public int coins;
+    //public int coins;
+
+    public SOCoins sOCoins;
 
     public TextMeshProUGUI coinsNumber;
 
@@ -18,13 +20,22 @@ public class ItemManager : Singleton<ItemManager>
 
     private void Reset()
     {
-        coins = 0;
-        coinsNumber.text = "0";
+        sOCoins.valor = 0;
+        coinsNumber.text = sOCoins.valor.ToString();
     }
 
-    public void AddCoins(int amount = 1)
+    public void AddBCoins(int amount = 1)
     {
-        coins += amount;
-        coinsNumber.text = coins.ToString();
+        sOCoins.valor += amount;
+        coinsNumber.text = sOCoins.valor.ToString();
     }
+    public void AddGCoins(int amount = 3)
+    {        
+        sOCoins.valor += amount;
+        coinsNumber.text = sOCoins.valor.ToString();
+    }
+
+    
+
+    
 }

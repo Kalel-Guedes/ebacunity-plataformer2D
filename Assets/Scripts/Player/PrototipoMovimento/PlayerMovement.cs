@@ -4,29 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D myRigidbody;
-
+    /*
     public Vector2 velocity;
-
     public float speed;
     public float speedRun;
     public float _currentSpeed;
     public float forcejump;
-
     public string animationTrigger = "Walk";
-    public string animationJump = "Jump";
-    public Animator animator;
-
-    public Transform shootPoint;
-    public Transform sideReference;
+    public string animationJump = "Jump";    
     public Bullet prefabBullet;
     public float timeShoot = .2f;
+    */
+    public SOPlayer player;
     private Coroutine _currentCoroutine;
-    
-
-
-
-    
+    public Rigidbody2D myRigidbody;    
+    public Transform shootPoint;
+    public Transform sideReference;
+    public Animator animator;
 
     void Update()
     {
@@ -39,43 +33,43 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myRigidbody.linearVelocity = Vector2.up * forcejump;
-            animator.SetBool(animationJump, true);
+            myRigidbody.linearVelocity = Vector2.up * player.forcejump;
+            animator.SetBool(player.animationJump, true);
         }
         else
         {
-            animator.SetBool(animationJump, false);
+            animator.SetBool(player.animationJump, false);
         }
     }
     private void Movement()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            myRigidbody.linearVelocity = new Vector2(-_currentSpeed, myRigidbody.linearVelocity.y);
+            myRigidbody.linearVelocity = new Vector2(-player._currentSpeed, myRigidbody.linearVelocity.y);
             myRigidbody.transform.localScale = new Vector3(-1, 1, 1);
-            animator.SetBool(animationTrigger, true);
+            animator.SetBool(player.animationTrigger, true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            myRigidbody.linearVelocity = new Vector2(_currentSpeed, myRigidbody.linearVelocity.y);
+            myRigidbody.linearVelocity = new Vector2(player._currentSpeed, myRigidbody.linearVelocity.y);
             myRigidbody.transform.localScale = new Vector3(1, 1, 1);
-            animator.SetBool(animationTrigger, true);
+            animator.SetBool(player.animationTrigger, true);
         }
         else
         {
-            animator.SetBool(animationTrigger, false);
+            animator.SetBool(player.animationTrigger, false);
         }
 
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            _currentSpeed = speedRun;
+            player._currentSpeed = player.speedRun;
             animator.speed = 1.5f;
 
         }
         else
         {
-            _currentSpeed = speed;
+            player._currentSpeed = player.speed;
             animator.speed = 1f;
         }
 
@@ -94,14 +88,14 @@ public class PlayerMovement : MonoBehaviour
         while (true)
         {
             Spawnitem();
-            yield return new WaitForSeconds(timeShoot);
+            yield return new WaitForSeconds(player.timeShoot);
         }
     }
 
     private void Spawnitem()
     {
 
-        var obj = Instantiate(prefabBullet);
+        var obj = Instantiate(player.prefabBullet);
         obj.transform.position = shootPoint.transform.position;
         obj.side = sideReference.transform.localScale.x;
 
