@@ -1,8 +1,17 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
     public string compareTag = "Player";
+
+    public ParticleSystem particles;
+
+    public GameObject graphicItem;
+
+
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,13 +21,24 @@ public class CollectableBase : MonoBehaviour
         }
     }
 
-    protected virtual void Collect()
+    private void HideObject()
     {
-        Debug.Log("Collect");        
         gameObject.SetActive(false);
-        OnCollect();
     }
 
-    protected virtual void OnCollect() { }
+    protected virtual void Collect()
+    {
+        if (graphicItem != null) graphicItem.SetActive(false);
+        Debug.Log("Collect");
+        OnCollect();
+        Invoke("HideObject", 3f);
+        
+    }
+
+
+    protected virtual void OnCollect()
+    {
+        if (particles != null) particles.Play();
+    }
     
 }

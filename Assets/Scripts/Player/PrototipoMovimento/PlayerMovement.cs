@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform shootPoint;
     public Transform sideReference;
     public Animator animator;
+    public ParticleSystem particles;
+    public ParticleSystem particlesJump;
 
     void Update()
     {
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         {
             myRigidbody.linearVelocity = Vector2.up * player.forcejump;
             animator.SetBool(player.animationJump, true);
+            if (particlesJump != null) particlesJump.Play();
         }
         else
         {
@@ -48,12 +51,14 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.linearVelocity = new Vector2(-player._currentSpeed, myRigidbody.linearVelocity.y);
             myRigidbody.transform.localScale = new Vector3(-1, 1, 1);
             animator.SetBool(player.animationTrigger, true);
+            if (particles != null) particles.Play();
         }
         else if (Input.GetKey(KeyCode.D))
         {
             myRigidbody.linearVelocity = new Vector2(player._currentSpeed, myRigidbody.linearVelocity.y);
             myRigidbody.transform.localScale = new Vector3(1, 1, 1);
             animator.SetBool(player.animationTrigger, true);
+            if (particles != null) particles.Play();
         }
         else
         {
