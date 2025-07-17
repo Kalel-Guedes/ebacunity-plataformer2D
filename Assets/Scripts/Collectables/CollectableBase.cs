@@ -10,6 +10,8 @@ public class CollectableBase : MonoBehaviour
 
     public GameObject graphicItem;
 
+    public AudioSource audio;
+
 
     
 
@@ -39,6 +41,7 @@ public class CollectableBase : MonoBehaviour
     protected virtual void OnCollect()
     {
         if (particles != null) particles.Play();
+        if (audio != null) audio.Play();
     }
     
 }

@@ -17,17 +17,22 @@ public class PlayerMovement : MonoBehaviour
     */
     public SOPlayer player;
     private Coroutine _currentCoroutine;
-    public Rigidbody2D myRigidbody;    
+    public Rigidbody2D myRigidbody;
     public Transform shootPoint;
     public Transform sideReference;
     public Animator animator;
     public ParticleSystem particles;
     public ParticleSystem particlesJump;
+    public AudioSource audioJump;
+    public AudioSource audioGun;
+    public AudioSource audioRun;
+
 
     void Update()
     {
         Jump();
         Movement();
+        Audio();
 
     }
 
@@ -38,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.linearVelocity = Vector2.up * player.forcejump;
             animator.SetBool(player.animationJump, true);
             if (particlesJump != null) particlesJump.Play();
+            if (audioJump != null) audioJump.Play();
         }
         else
         {
@@ -52,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.transform.localScale = new Vector3(-1, 1, 1);
             animator.SetBool(player.animationTrigger, true);
             if (particles != null) particles.Play();
+            
         }
         else if (Input.GetKey(KeyCode.D))
         {
@@ -59,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.transform.localScale = new Vector3(1, 1, 1);
             animator.SetBool(player.animationTrigger, true);
             if (particles != null) particles.Play();
+            
         }
         else
         {
@@ -81,10 +89,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _currentCoroutine = StartCoroutine(StartShoot());
+            if (audioGun != null) audioGun.Play();
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if(_currentCoroutine != null){ StopCoroutine(_currentCoroutine); }
+            if (_currentCoroutine != null) { StopCoroutine(_currentCoroutine); }
         }
     }
 
@@ -108,6 +117,29 @@ public class PlayerMovement : MonoBehaviour
         //obj.GetComponent<Rigidbody>().AddForce(Force);
 
     }
+    private void Audio()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (audioRun != null) audioRun.Play();
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            if (audioRun != null) audioRun.Stop();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (audioRun != null) audioRun.Play();
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+             if (audioRun != null) audioRun.Stop();
+        }
+
+        
+    }
+
+    
     
      
 }

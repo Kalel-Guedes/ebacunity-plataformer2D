@@ -14,7 +14,10 @@ public class HealthBase : MonoBehaviour
     private int _currentLife;
     private bool _isDead = false;
 
+    public bool isPlayer = false;
+
     public Action OnKill;
+    public AudioSource audioDamage;
 
 
     void Awake()
@@ -34,6 +37,8 @@ public class HealthBase : MonoBehaviour
 
         _currentLife -= damage;
 
+        if (isPlayer==true) {if (audioDamage != null) audioDamage.Play();}
+
         if (_currentLife <= 0)
         {
             Kill();
@@ -50,6 +55,8 @@ public class HealthBase : MonoBehaviour
         }
 
         OnKill.Invoke();
+
+    
         
     }
 }
